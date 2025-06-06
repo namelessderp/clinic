@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Update page</title>
+	</head>
+	<style>
+		body{margin:100px;font-size:25;background-image:url("../static/clinic.jpg");background-size:cover;}
+		}
+		table {
+			border-collapse:collapse;
+			border-spacing: 0;
+			width:100%;
+			border:1px solid;
+			border-color:#ddd;
+			margin-top:200px
+		}
+
+		th,td{
+			text-align:left;
+			padding:8px;
+		}
+
+		tr:nth-child(even){background-color:#f2f2f2}
+
+	</style>
+	<h1 style = "font-size:40px"><center>Update information</center></h1>
+	<div style="overflow-x:auto;">
+	<table>
+		<th>Type</th>
+		<th>NRIC</th>
+		<th>First name</th>
+		<th>Last name</th>
+		<th>Date of Birth</th>
+		<th>Home address</th>
+		<th>Contact Number</th>
+		<th>Gender</th>
+		<th>Clinic</th>
+		<th>Clinic Address</th>
+		<th>Clinic Contact</th>
+		{% if type_info == "Staff" %}
+			<th>Status</th>
+		{% else %}
+			<th>Allergy</th>
+		{% endif %}
+		<p><form action = "{{url_for('Updated')}}" method = "POST"></p>
+			
+			{% for row in cursor %}
+				<tr>
+				{% for index in range(row|length)%}
+					<td><textarea type = "text" name = {{lst[index]}}>{{row[index]}}</textarea></td>
+				{% endfor %}
+				</tr>
+			{% endfor %}
+		
+	</table>
+	</div>
+	<p><input type = "submit" value = "Update"></p>
+	{%if length_check == True%}
+			<p>Please enter 9 characters for NRIC.</p>
+			
+		{%else%}
+			{%if format_check == True%}
+				
+				<p style = "color:red">Please enter a valid NRIC.</p>
+			{% else %}
+				{%if clinic_check == True %}
+					<p style = "color:red">Please enter a valid clinic.</p>
+				{%else%}
+					{%if name_check == True %}
+						<p style = "color:red">Please do not include foreign characters in name.</p>
+					{%else%}
+						{%if contact_check == True %}
+							<p style = "color:red">Please check length and do not include alphabets or foreign characters in contact.</p>
+						{%else%}
+							{%if gender_check == True%}
+								<p style = "color:red">Gender can only be Male/Female.</p>
+							{%else%}
+								{% if dob_check == True %}
+									<p style = "color:red">Please enter a valid date of birth.</p>
+								{%else%}
+									{% if type_info == "Staff" %}
+										{%if status_check == True %}
+											<p style = "color:red">Please enter a valid status.</p>
+										{%endif%}
+									{%else%}
+										{%if allergy_check == True %}
+											<p style = "color:red">Please do not include foreign characters in allergy.</p>
+										{%endif%}
+									{%endif%}
+								{%endif%}
+							{%endif%}
+						{%endif%}
+					{%endif%}
+				{%endif%}
+			{%endif%}
+		{%endif%}
+	</form>
+	<a href = "{{url_for('Back')}}"><mark>Back to main page ?</mark>
+	
+</html>

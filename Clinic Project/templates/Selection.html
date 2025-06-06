@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head><title>Selection</title></head>
+	<style>
+		 body{margin:100px;font-size:25;background-image:url("../static/clinic.jpg");background-size:cover;}
+		.dropbtn{background-color:lightblue;color:black;padding:20px;font-size:16px;cursor:pointer;}
+		.dropdown{position: relative;display:inline-block;}
+		.dropdown-content {display: none;position: absolute; background-color:pink;}
+		.dropdown-content a{color:black;padding:12px 16px;display:block}
+		.dropdown-content a:hover {background-color:lime;}
+		.dropdown:hover .dropdown-content{display:block;}
+		.dropdown:hover .dropbtn{background-color:lightblue;}
+	</style>
+	<mark style = "margin:690px;font-size:100px">Selection</mark><center>
+	<body><center>
+		<div class = "dropdown">
+			<p><button class = "dropbtn">Select</button></p>
+			<div class = "dropdown-content">
+			<a href = "{{url_for('search_template')}}">Search staff/patient</a>
+			<a href = "{{url_for('add_template')}}">>Add new patient/staff</a>
+			<a href = "{{url_for('update_template')}}">>Update information</a>
+			<a href = "{{url_for('count_template')}}">>Count patient</a>
+			</div>
+		</div>
+	</body></center>
+</html>
+		

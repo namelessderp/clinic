@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Information</title>
+	</head>
+	<style>
+		body{margin:100px;font-size:25;background-image:url("../static/clinic.jpg");background-size:cover;}
+		table {
+			border-collapse:collapse;
+			border-spacing: 0;
+			width:100%;
+			border:1px solid;
+			border-color:#dddddd;
+		}
+
+		th,td{
+			text-align:left;
+			padding:8px;
+		}
+
+		tr:nth-child(even){background-color:#f2f2f2}
+		tr:nth-child(odd){background-color:white}
+	</style>
+	<h1 style = "font-size:40px"><center><mark>Details of person</mark></center></h1>
+	<div style="overflow-x:auto;">
+	<table>
+		<tr>
+		<th>Type</th>
+		<th>NRIC</th>
+		<th>First name</th>
+		<th>Last name</th>
+		<th>Date of Birth</th>
+		<th>Home address</th>
+		<th>Contact Number</th>
+		<th>Gender</th>
+		<th>Clinic</th>
+		<th>Clinic Address</th>
+		<th>Clinic Contact</th>
+		{% if type_info == "Staff" %}
+			<th>Status</th>
+		{% else %}
+			<th>Allergy</th>
+		{% endif %}
+		</tr>
+			{% for row in cursor %}
+				<tr>
+				{% for element in row %}
+					<td>{{element}}</td>
+				{%endfor%}
+				</tr>
+			{% endfor %}
+		</tr>
+	</div>
+	</table>
+	<a href = "{{url_for('Back')}}"><mark>Back to main page ?</mark>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head><title>Add new patient/staff</title></head>
+	<style>
+		 body{margin:100px;font-size:25;background-image:url("../static/clinic.jpg");background-size:cover;}
+	</style>
+	<body>
+		<h2> <mark>Key in information here </mark></h2>
+		<p><form action = "{{url_for('Add')}}" method = "POST"></p>
+		<input type = "radio" id = "patient" name = "type_info" value = "patient" required</input>
+		<label for = "patient"><mark>Patient</mark></label></br>
+		<input type = "radio" id = "staff" name = "type_info" value = "Staff" required></input>
+		<label for = "staff"><mark>Staff</mark></label></br>
+		<p><label><mark>Staff type : </mark><input type = "text" name = "staff_type" placeholder = "If applicable"></input></label></p>
+		<p><label><mark>NRIC : </mark><input type = "text" name = "nric" required></input></label></p>
+		<p><label><mark>First name : </mark><input type = "text" name = "first_name" required></input></label></p>
+		<p><label><mark>Last name : </mark><input type = "text" name = "last_name" required></input></label></p>
+		<p><label><mark>Date of birth(dd/mm/yy) : </mark><input type = "text" name = "dob" required></input></label></p>
+		<p><label><mark>Home address : </mark><input type = "text" name = "address" required></input></label></p>
+		<p><label><mark>Contact : </mark><input type = "text" name = "contact" required></input></label></p>
+		<p><label><mark>Gender(Male/Female) : </mark><input type = "text" name = "gender" required></input></label></p>
+		<p><label><mark>Clinic : </mark><input type = "text" name = "clinic" required></input></label></p>
+		<p><label><mark>Allergy : </mark><input type = "text" name = "allergy"  placeholder = "If applicable"></input></label></p>
+		<p><label><mark>Status(Active/Inactive) : </mark><input type = "text" name = "status"  placeholder = "If applicable"></input></label></p>
+		<input type = "submit" value = "Submit"></input>
+		{%if length_check == True%}
+			<p>Please enter 9 characters for NRIC.</p>
+		{%else%}
+			{%if format_check == True%}
+				<p style = "color:red">Please enter a valid NRIC.</p>
+			{% else %}
+				{%if clinic_check == True %}
+					<p style = "color:red">Please enter a valid clinic.</p>
+				{%else%}
+					{%if name_check == True %}
+						<p style = "color:red">Please do not include foreign characters in name.</p>
+					{%else%}
+						{%if contact_check == True %}
+							<p style = "color:red">Please check length and do not include alphabets or foreign characters in contact.</p>
+						{%else%}
+							{%if gender_check == True%}
+								<p style = "color:red">Gender can only be Male/Female.</p>
+							{%else%}
+								{% if dob_check == True %}
+									<p style = "color:red">Please enter a valid date of birth.</p>
+								{%else%}
+									{% if type_info == "Staff" %}
+										{%if status_check == True %}
+											<p style = "color:red">Please enter a valid status.</p>
+										{%endif%}
+									{%else%}
+										{%if allergy_check == True %}
+											<p style = "color:red">Please do not include foreign characters in allergy.</p>
+										{%endif%}
+									{%endif%}
+								{%endif%}
+							{%endif%}
+						{%endif%}
+					{%endif%}
+				{%endif%}
+			{%endif%}
+		{%endif%}
+								
+		</form>
+		<p><a href = "{{url_for('Back')}}"><mark>Back to main page ?</mark></p>
+	</body>
+</html>

@@ -1,0 +1,4 @@
+CREATE TABLE ClinicInfo(Clinic TEXT PRIMARY KEY, Clinic_address TEXT, Clinic_contact TEXT);
+CREATE TABLE Person(type TEXT,NRIC TEXT, First_name TEXT,Last_name TEXT,Date_of_birth TEXT,Home_address TEXT,Contact_number TEXT,Gender TEXT,Allergy TEXT,PRIMARY KEY(NRIC));
+CREATE TABLE Staff(NRIC TEXT,Clinic TEXT,Status TEXT,PRIMARY KEY(NRIC,Clinic), FOREIGN KEY(NRIC) REFERENCES Person(NRIC),FOREIGN KEY(Clinic) REFERENCES ClinicInfo(Clinic));
+CREATE TABLE Patient(NRIC TEXT,Clinic TEXT,PRIMARY KEY(NRIC,Clinic), FOREIGN KEY(NRIC) REFERENCES Person(NRIC),FOREIGN KEY(Clinic) REFERENCES ClinicInfo(Clinic));

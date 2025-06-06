@@ -1,0 +1,32 @@
+<!doctype>
+<html>
+	<head><title>Search</title></head>
+	<style>
+	body{margin:100px;font-size:25;background-image:url("../static/clinic.jpg");background-size:cover;}
+	
+	</style>
+	<body><center>
+		<p><form action = "{{url_for('Search')}}" method = "POST"</p>
+		<input type = "radio" id = "patient"  name = "type_info" value = "Patient" required</input>
+		<b><label for = "patient"><mark>Patient</mark></label></br></b>
+		<input type = "radio" id = "staff" name = "type_info" value = "Staff" required></input>
+		<b><label for = "staff" style = "margin:9px"><mark>Staff</mark></label></b>
+		<b><p><label><mark>NRIC : </mark><input type = "text" name = "nric" required></input></label></p></b>
+		<b><p><label><mark>Clinic :</mark><input type = "text" name = "clinic" required></input></label></p></b>
+		<input type = "submit" value = "Search"></input>
+		{%if length_check == True%}
+			<p style = "color:red">Please enter 9 characters for NRIC.</p>
+		{%else%}
+			{%if format_check == True%}
+				<p style = "color:red">Please enter a valid NRIC.</p>
+			{% else %}
+				{%if clinic_check == True %}
+					<p style = "color:red">Please enter a valid clinic.</p>
+				{%endif%}
+			{%endif%}
+		{%endif%}
+		
+		</form>
+		<a href = "{{url_for('Back')}}"><mark>Back to main page ?</mark>
+	</body></center>
+</html>
